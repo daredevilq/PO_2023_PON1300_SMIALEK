@@ -4,35 +4,21 @@ import agh.ics.oop.model.MoveDirection;
 
 public class World {
 
-    static void run(MoveDirection[] arg){
-        for (MoveDirection i: arg) {
+    static void run(MoveDirection[] directions){
+        for (MoveDirection i: directions) {
             switch (i){
-                case FORWARD: {
-                    System.out.println("Zwierzak idzie do przodu");
-                    break;
-                }
-                case BACKWARD:{
-                    System.out.println("Zwierzak idzie do tylu");
-                    break;
-                }
-                case RIGHT:{
-                    System.out.println("Zwierzak skreca w prawo");
-                    break;
-                }
-                case LEFT:{
-                    System.out.println("Zwierzak skreca w lewo");
-                    break;
-                }
-
+                case FORWARD -> System.out.println("Zwierzak idzie do przodu");
+                case BACKWARD -> System.out.println("Zwierzak idzie do tylu");
+                case RIGHT -> System.out.println("Zwierzak skreca w prawo");
+                case LEFT -> System.out.println("Zwierzak skreca w lewo");
             }
         }
     }
 
-    //MoveDirection direction = MoveDirection.RIGHT;
     public static void main(String[] args) {
-        MoveDirection[] direction = OptionsParser.convert(args);
+        MoveDirection[] directions = OptionsParser.convert(args);
         System.out.println("Start");
-        World.run(direction);
+        World.run(directions);
         System.out.println("Stop");
     }
 
