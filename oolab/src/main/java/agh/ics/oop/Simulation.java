@@ -5,6 +5,7 @@ import agh.ics.oop.model.MoveDirection;
 import agh.ics.oop.model.Vector2d;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Simulation {
@@ -40,5 +41,15 @@ public class Simulation {
 
     }
 
+    public List<Animal> getAnimalsList() {
+        return Collections.unmodifiableList(this.animalsList);
+    }
 
+    public List<MoveDirection> getInitialMoves() {
+        return Collections.unmodifiableList(this.initialMoves);
+    }
+
+    public List<Vector2d> getInitialPositions() {
+        return Collections.unmodifiableList(this.initialPositions);
+    }
 }
