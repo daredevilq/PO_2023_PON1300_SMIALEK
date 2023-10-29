@@ -69,24 +69,5 @@ public class Vector2d {
         return Objects.hash(x, y);
     }
 
-    /*   Zrobione samemu
-     @Override
-        public boolean equals(Object other) {
-            if (this == other) {
-                return true;
-            }
-            if (!(other instanceof Vector2d)) {
-                return false;
-            }
-            Vector2d that = (Vector2d) other;
-            return this.x == that.x && this.y == that.y;
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(x, y);
-        }
-
-    */
 
 }
