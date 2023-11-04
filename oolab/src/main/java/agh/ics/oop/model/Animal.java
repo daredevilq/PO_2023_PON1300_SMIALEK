@@ -26,10 +26,21 @@ public class Animal {
 
     @Override
     public String toString() {
-        return "{" +
-                "orientation=" + orientation +
-                ", position=" + position +
-                '}';
+       switch (orientation){
+           case NORTH -> {
+               return "N";
+           }
+           case SOUTH -> {
+               return "S";
+           }
+           case EAST -> {
+               return "E";
+           }
+           case WEST -> {
+               return "W";
+           }
+       }
+        return null;
     }
 
 
@@ -38,7 +49,7 @@ public class Animal {
     }
 
 
-    private boolean isValidMove(int x, int y, Vector2d moveVector, MoveDirection direction){
+    private Vector2d calculateNewPosition(int x, int y, Vector2d moveVector, MoveDirection direction){
 
         Vector2d newPosition = new Vector2d(x,y);
         if (direction.equals(MoveDirection.BACKWARD)){
@@ -48,30 +59,34 @@ public class Animal {
             newPosition = newPosition.add(moveVector);
         }
 
-        return rightTopBound.follows(newPosition) && leftBottomBound.precedes(newPosition);
+        return newPosition;
     }
 
-    public void move(MoveDirection direction){
+    public void move(MoveDirection direction, RectangularMap map){
         switch (direction){
             case FORWARD ->{
                 switch (this.orientation){
                     case NORTH ->{
-                        if (isValidMove(this.position.getX(),this.position.getY(),moveOneStepNorthVector, direction)){
+                        Vector2d newPosition = calculateNewPosition(this.position.getX(),this.position.getY(),moveOneStepNorthVector, direction);
+                        if (map.canMoveTo(newPosition)){
                             this.position = this.position.add(moveOneStepNorthVector);
                         }
                     }
                     case SOUTH ->{
-                        if (isValidMove(this.position.getX(),this.position.getY(),moveOneStepSouthVector, direction)){
+                        Vector2d newPosition = calculateNewPosition(this.position.getX(),this.position.getY(),moveOneStepSouthVector, direction);
+                        if (map.canMoveTo(newPosition)){
                             this.position = this.position.add(moveOneStepSouthVector);
                         }
                     }
                     case EAST ->{
-                        if (isValidMove(this.position.getX(),this.position.getY(),moveOneStepEastVector, direction)){
+                        Vector2d newPosition = calculateNewPosition(this.position.getX(),this.position.getY(),moveOneStepEastVector, direction);
+                        if (map.canMoveTo(newPosition)){
                             this.position = this.position.add(moveOneStepEastVector);
                         }
                     }
                     case WEST ->{
-                        if (isValidMove(this.position.getX(),this.position.getY(),moveOneStepWestVector, direction)){
+                        Vector2d newPosition = calculateNewPosition(this.position.getX(),this.position.getY(),moveOneStepWestVector, direction);
+                        if (map.canMoveTo(newPosition)){
                             this.position = this.position.add(moveOneStepWestVector);
                         }
                     }
@@ -83,22 +98,26 @@ public class Animal {
             case BACKWARD -> {
                 switch (this.orientation){
                     case NORTH ->{
-                        if (isValidMove(this.position.getX(),this.position.getY(),moveOneStepNorthVector, direction)){
+                        Vector2d newPosition = calculateNewPosition(this.position.getX(),this.position.getY(),moveOneStepNorthVector, direction);
+                        if (map.canMoveTo(newPosition)){
                             this.position = this.position.subtract(moveOneStepNorthVector);
                         }
                     }
                     case SOUTH ->{
-                        if (isValidMove(this.position.getX(),this.position.getY(),moveOneStepSouthVector, direction)){
+                        Vector2d newPosition = calculateNewPosition(this.position.getX(),this.position.getY(),moveOneStepSouthVector, direction);
+                        if (map.canMoveTo(newPosition)){
                             this.position = this.position.subtract(moveOneStepSouthVector);
                         }
                     }
                     case EAST ->{
-                        if (isValidMove(this.position.getX(),this.position.getY(),moveOneStepEastVector, direction)){
+                        Vector2d newPosition = calculateNewPosition(this.position.getX(),this.position.getY(),moveOneStepEastVector, direction);
+                        if (map.canMoveTo(newPosition)){
                             this.position = this.position.subtract(moveOneStepEastVector);
                         }
                     }
                     case WEST ->{
-                        if (isValidMove(this.position.getX(),this.position.getY(),moveOneStepWestVector, direction)){
+                        Vector2d newPosition = calculateNewPosition(this.position.getX(),this.position.getY(),moveOneStepWestVector, direction);
+                        if (map.canMoveTo(newPosition)){
                             this.position = this.position.subtract(moveOneStepWestVector);
                         }
                     }

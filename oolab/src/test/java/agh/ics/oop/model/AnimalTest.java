@@ -23,9 +23,11 @@ public class AnimalTest {
     public void orientationTest2(){
         //given
         Animal testAnimal = new Animal();
+        WorldMap map = new RectangularMap(4, 4);
         //when
         MapDirection expectedOutcome = MapDirection.EAST;
-        testAnimal.move(MoveDirection.RIGHT);
+        map.place(testAnimal);
+        map.move(testAnimal, MoveDirection.RIGHT);
         //then
         assertEquals(testAnimal.getOrientation(), expectedOutcome);
     }
@@ -36,9 +38,11 @@ public class AnimalTest {
     public void orientationTest3(){
         //given
         Animal testAnimal = new Animal();
+        WorldMap map = new RectangularMap(4, 4);
         //when
         MapDirection expectedOutcome = MapDirection.WEST;
-        testAnimal.move(MoveDirection.LEFT);
+        map.place(testAnimal);
+        map.move(testAnimal, MoveDirection.LEFT);
         //then
         assertEquals(testAnimal.getOrientation(), expectedOutcome);
     }
@@ -47,10 +51,12 @@ public class AnimalTest {
     public void orientationTest4(){
         //given
         Animal testAnimal = new Animal();
+        WorldMap map = new RectangularMap(4, 4);
         //when
         MapDirection expectedOutcome = MapDirection.SOUTH;
-        testAnimal.move(MoveDirection.LEFT);
-        testAnimal.move(MoveDirection.LEFT);
+        map.place(testAnimal);
+        map.move(testAnimal, MoveDirection.LEFT);
+        map.move(testAnimal, MoveDirection.LEFT);
         //then
         assertEquals(testAnimal.getOrientation(), expectedOutcome);
     }
@@ -62,13 +68,16 @@ public class AnimalTest {
     public void moveTest1(){
         //given
         Animal testAnimal = new Animal();
+        WorldMap map = new RectangularMap(4, 4);
         //when
         Vector2d expectedOutcome = new Vector2d(3,2);
-        testAnimal.move(MoveDirection.FORWARD);
-        testAnimal.move(MoveDirection.RIGHT);
-        testAnimal.move(MoveDirection.FORWARD);
-        testAnimal.move(MoveDirection.RIGHT);
-        testAnimal.move(MoveDirection.FORWARD);
+        map.place(testAnimal);
+        map.move(testAnimal, MoveDirection.FORWARD);;
+        map.move(testAnimal, MoveDirection.RIGHT);
+        map.move(testAnimal, MoveDirection.FORWARD);
+        map.move(testAnimal, MoveDirection.RIGHT);
+        map.move(testAnimal, MoveDirection.FORWARD);
+
         //then
         assertEquals(testAnimal.getPosition(), expectedOutcome);
     }
@@ -77,13 +86,15 @@ public class AnimalTest {
     public void moveTest2(){
         //given
         Animal testAnimal = new Animal();
+        WorldMap map = new RectangularMap(4, 4);
         //when
         Vector2d expectedOutcome = new Vector2d(1,2);
-        testAnimal.move(MoveDirection.FORWARD);
-        testAnimal.move(MoveDirection.LEFT);
-        testAnimal.move(MoveDirection.FORWARD);
-        testAnimal.move(MoveDirection.LEFT);
-        testAnimal.move(MoveDirection.FORWARD);
+        map.place(testAnimal);
+        map.move(testAnimal, MoveDirection.FORWARD);
+        map.move(testAnimal, MoveDirection.LEFT);
+        map.move(testAnimal, MoveDirection.FORWARD);
+        map.move(testAnimal, MoveDirection.LEFT);
+        map.move(testAnimal, MoveDirection.FORWARD);
         //then
         assertEquals(testAnimal.getPosition(), expectedOutcome);
     }
@@ -95,17 +106,19 @@ public class AnimalTest {
     public void moveTest3(){
         //given
         Animal testAnimal = new Animal();
+        WorldMap map = new RectangularMap(4, 4);
         //when
+        map.place(testAnimal);
         Vector2d expectedOutcome = new Vector2d(4, 4);
-        testAnimal.move(MoveDirection.FORWARD);
-        testAnimal.move(MoveDirection.RIGHT);
-        testAnimal.move(MoveDirection.FORWARD);
-        testAnimal.move(MoveDirection.LEFT);
-        testAnimal.move(MoveDirection.FORWARD);
-        testAnimal.move(MoveDirection.FORWARD);
-        testAnimal.move(MoveDirection.RIGHT);
-        testAnimal.move(MoveDirection.FORWARD);
-        testAnimal.move(MoveDirection.FORWARD);
+        map.move(testAnimal, MoveDirection.FORWARD);
+        map.move(testAnimal, MoveDirection.RIGHT);
+        map.move(testAnimal, MoveDirection.FORWARD);
+        map.move(testAnimal, MoveDirection.LEFT);
+        map.move(testAnimal, MoveDirection.FORWARD);
+        map.move(testAnimal, MoveDirection.FORWARD);
+        map.move(testAnimal, MoveDirection.RIGHT);
+        map.move(testAnimal, MoveDirection.FORWARD);
+        map.move(testAnimal, MoveDirection.FORWARD);
         //then
         assertEquals(testAnimal.getPosition(), expectedOutcome);
     }
@@ -114,17 +127,21 @@ public class AnimalTest {
     public void moveTest4(){
         //given
         Animal testAnimal = new Animal();
+        WorldMap map = new RectangularMap(4, 4);
+
         //when
         Vector2d expectedOutcome = new Vector2d(4, 0);
-        testAnimal.move(MoveDirection.RIGHT);
-        testAnimal.move(MoveDirection.FORWARD);
-        testAnimal.move(MoveDirection.FORWARD);
-        testAnimal.move(MoveDirection.FORWARD);
-        testAnimal.move(MoveDirection.RIGHT);
-        testAnimal.move(MoveDirection.FORWARD);
-        testAnimal.move(MoveDirection.FORWARD);
-        testAnimal.move(MoveDirection.FORWARD);
-        testAnimal.move(MoveDirection.FORWARD);
+        map.place(testAnimal);
+        map.move(testAnimal, MoveDirection.RIGHT);
+        map.move(testAnimal, MoveDirection.FORWARD);
+        map.move(testAnimal, MoveDirection.FORWARD);
+        map.move(testAnimal, MoveDirection.FORWARD);
+        map.move(testAnimal, MoveDirection.RIGHT);
+        map.move(testAnimal, MoveDirection.FORWARD);
+        map.move(testAnimal, MoveDirection.FORWARD);
+        map.move(testAnimal, MoveDirection.FORWARD);
+        map.move(testAnimal, MoveDirection.FORWARD);
+
         //then
         assertEquals(testAnimal.getPosition(), expectedOutcome);
     }
@@ -133,17 +150,20 @@ public class AnimalTest {
     public void moveTest5(){
         //given
         Animal testAnimal = new Animal();
+        WorldMap map = new RectangularMap(4, 4);
         //when
+        map.place(testAnimal);
         Vector2d expectedOutcome = new Vector2d(0, 4);
-        testAnimal.move(MoveDirection.FORWARD);
-        testAnimal.move(MoveDirection.LEFT);
-        testAnimal.move(MoveDirection.FORWARD);
-        testAnimal.move(MoveDirection.FORWARD);
-        testAnimal.move(MoveDirection.FORWARD);
-        testAnimal.move(MoveDirection.RIGHT);
-        testAnimal.move(MoveDirection.FORWARD);
-        testAnimal.move(MoveDirection.FORWARD);
-        testAnimal.move(MoveDirection.FORWARD);
+        map.move(testAnimal, MoveDirection.FORWARD);
+        map.move(testAnimal, MoveDirection.LEFT);
+        map.move(testAnimal, MoveDirection.FORWARD);
+        map.move(testAnimal, MoveDirection.FORWARD);
+        map.move(testAnimal, MoveDirection.FORWARD);
+        map.move(testAnimal, MoveDirection.RIGHT);
+        map.move(testAnimal, MoveDirection.FORWARD);
+        map.move(testAnimal, MoveDirection.FORWARD);
+        map.move(testAnimal, MoveDirection.FORWARD);
+
         //then
         assertEquals(testAnimal.getPosition(), expectedOutcome);
     }
@@ -152,16 +172,18 @@ public class AnimalTest {
     public void moveTest6(){
         //given
         Animal testAnimal = new Animal();
+        WorldMap map = new RectangularMap(4, 4);
         //when
+        map.place(testAnimal);
         Vector2d expectedOutcome = new Vector2d(0, 0);
-        testAnimal.move(MoveDirection.BACKWARD);
-        testAnimal.move(MoveDirection.BACKWARD);
-        testAnimal.move(MoveDirection.BACKWARD);
-        testAnimal.move(MoveDirection.LEFT);
-        testAnimal.move(MoveDirection.FORWARD);
-        testAnimal.move(MoveDirection.FORWARD);
-        testAnimal.move(MoveDirection.FORWARD);
-        testAnimal.move(MoveDirection.FORWARD);
+        map.move(testAnimal, MoveDirection.BACKWARD);
+        map.move(testAnimal, MoveDirection.BACKWARD);
+        map.move(testAnimal, MoveDirection.BACKWARD);
+        map.move(testAnimal, MoveDirection.LEFT);;
+        map.move(testAnimal, MoveDirection.FORWARD);
+        map.move(testAnimal, MoveDirection.FORWARD);
+        map.move(testAnimal, MoveDirection.FORWARD);
+        map.move(testAnimal, MoveDirection.FORWARD);
         //then
         assertEquals(testAnimal.getPosition(), expectedOutcome);
     }

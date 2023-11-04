@@ -1,9 +1,6 @@
 package agh.ics.oop;
 
-import agh.ics.oop.model.Animal;
-import agh.ics.oop.model.MapDirection;
-import agh.ics.oop.model.MoveDirection;
-import agh.ics.oop.model.Vector2d;
+import agh.ics.oop.model.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -17,10 +14,11 @@ class SimulationTest {
         //given
         String [] arguments = {"f", "b", "r", "l" ,"f" ,"f", "r", "r", "f", "f", "f", "f", "f", "f", "f", "f"};
         List<Vector2d> positions = List.of(new Vector2d(2,2), new Vector2d(3,4));
+        WorldMap map = new RectangularMap(4, 4);
 
         //when
         List<MoveDirection> directions = OptionsParser.convert(arguments);
-        Simulation simulation = new Simulation(directions, positions);
+        Simulation simulation = new Simulation(directions, positions, map);
         simulation.run();
 
         //then
@@ -31,10 +29,10 @@ class SimulationTest {
 
         boolean outcome1 = expectedLength == actualLength;
 
-        boolean outcome2 = animalsList.get(0).getPosition().equals(new Vector2d(3,0));
+        boolean outcome2 = animalsList.get(0).getPosition().equals(new Vector2d(2,0));
         boolean outcome3 = animalsList.get(0).getOrientation().equals(MapDirection.SOUTH);
 
-        boolean outcome4 = animalsList.get(1).getPosition().equals(new Vector2d(2,4));
+        boolean outcome4 = animalsList.get(1).getPosition().equals(new Vector2d(3,4));
         boolean outcome5 = animalsList.get(1).getOrientation().equals(MapDirection.NORTH);
 
         assertTrue(outcome1 && outcome2 && outcome3 && outcome4 && outcome5);
@@ -46,10 +44,10 @@ class SimulationTest {
         //given
         String [] arguments = {"dasdas","f", "b", "r", "l","s","s" ,"f" ,"f", "r", "r", "f","fggf", "f", "f", "f", "f", "f", "f", "f", "losowe slowo", "dasdas"};
         List<Vector2d> positions = List.of(new Vector2d(2,2), new Vector2d(3,4));
-
+WorldMap map = new RectangularMap(4, 4);
         //when
         List<MoveDirection> directions = OptionsParser.convert(arguments);
-        Simulation simulation = new Simulation(directions, positions);
+        Simulation simulation = new Simulation(directions, positions, map);
         simulation.run();
 
         //then
@@ -60,10 +58,10 @@ class SimulationTest {
 
         boolean outcome1 = expectedLength == actualLength;
 
-        boolean outcome2 = animalsList.get(0).getPosition().equals(new Vector2d(3,0));
+        boolean outcome2 = animalsList.get(0).getPosition().equals(new Vector2d(2,0));
         boolean outcome3 = animalsList.get(0).getOrientation().equals(MapDirection.SOUTH);
 
-        boolean outcome4 = animalsList.get(1).getPosition().equals(new Vector2d(2,4));
+        boolean outcome4 = animalsList.get(1).getPosition().equals(new Vector2d(3,4));
         boolean outcome5 = animalsList.get(1).getOrientation().equals(MapDirection.NORTH);
 
         assertTrue(outcome1 && outcome2 && outcome3 && outcome4 && outcome5);
@@ -76,10 +74,10 @@ class SimulationTest {
         //given
         String [] arguments = {"f", "b", "r", "l", "f", "f", "r", "r", "f", "f", "f", "f", "f", "f", "f", "f", "b", "b", "r", "r", "l", "f", "f", "r", "f", "f", "l", "f", "b"};
         List<Vector2d> positions = List.of(new Vector2d(0,0), new Vector2d(1,2), new Vector2d(3,3), new Vector2d(2,4));
-
+        WorldMap map = new RectangularMap(4, 4);
         //when
         List<MoveDirection> directions = OptionsParser.convert(arguments);
-        Simulation simulation = new Simulation(directions, positions);
+        Simulation simulation = new Simulation(directions, positions, map);
         simulation.run();
 
         //then
@@ -111,10 +109,10 @@ class SimulationTest {
         //given
         String [] arguments = {"a","f", "b", "r","ss", "l", "f", "f", "r", "r", "f", "f", "f","radnom", "f", "f", "f", "f", "dasda","f", "b", "b", "r", "r", "l", "f", "f", "r", "f", "f", "l", "f", "b","idk"};
         List<Vector2d> positions = List.of(new Vector2d(0,0), new Vector2d(1,2), new Vector2d(3,3), new Vector2d(2,4));
-
+        WorldMap map = new RectangularMap(4, 4);
         //when
         List<MoveDirection> directions = OptionsParser.convert(arguments);
-        Simulation simulation = new Simulation(directions, positions);
+        Simulation simulation = new Simulation(directions, positions, map);
         simulation.run();
 
         //then
