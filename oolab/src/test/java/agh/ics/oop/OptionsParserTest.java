@@ -3,6 +3,8 @@ package agh.ics.oop;
 import agh.ics.oop.model.MoveDirection;
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class OptionsParserTest {
@@ -13,9 +15,16 @@ public class OptionsParserTest {
         String [] inputValues = {"f","b","r","l"};
 
         //when
-        MoveDirection[] directions =  OptionsParser.convert(inputValues);
+        List<MoveDirection> directions =  OptionsParser.convert(inputValues);
 
-        boolean outcome = directions[0] == MoveDirection.FORWARD &&  directions[1] == MoveDirection.BACKWARD && directions[2] == MoveDirection.RIGHT && directions[3] == MoveDirection.LEFT;
+        boolean outcome = true;
+
+        for (MoveDirection i:directions){
+            boolean temp;
+            temp = i.equals(MoveDirection.FORWARD) || i.equals(MoveDirection.BACKWARD) || i.equals(MoveDirection.LEFT) || i.equals(MoveDirection.RIGHT);
+
+            outcome = outcome && temp;
+        }
 
         //then
         assertTrue(outcome);
@@ -25,12 +34,19 @@ public class OptionsParserTest {
     @Test
     public void convertTest2(){
         //given
-        String [] inputValues = {"f","b","r","dasd"};
+        String [] inputValues = {"s","f","b", "zdas","r","dasd"};
 
         //when
-        MoveDirection[] directions =  OptionsParser.convert(inputValues);
+        List<MoveDirection> directions =  OptionsParser.convert(inputValues);
 
-        boolean outcome = directions[0] == MoveDirection.FORWARD &&  directions[1] == MoveDirection.BACKWARD && directions[2] == MoveDirection.RIGHT && directions[3] != MoveDirection.LEFT;
+        boolean outcome = true;
+
+        for (MoveDirection i:directions){
+            boolean temp;
+            temp = i.equals(MoveDirection.FORWARD) || i.equals(MoveDirection.BACKWARD) || i.equals(MoveDirection.LEFT) || i.equals(MoveDirection.RIGHT);
+
+            outcome = outcome && temp;
+        }
 
         //then
         assertTrue(outcome);
