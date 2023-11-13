@@ -54,8 +54,13 @@ public class Vector2d {
         return new Vector2d(-x,-y);
     }
 
+    public static Vector2d generateRandomVector(int maxX, int maxY){
+        int x = (int) (Math.random() * (maxX + 1));
+        int y = (int) (Math.random() * (maxY + 1));
+        return new Vector2d(x, y);
+    }
 
-    // Wygenerowane przez IJ
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

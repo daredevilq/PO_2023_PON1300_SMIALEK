@@ -9,11 +9,13 @@ public class World {
 
     public static void main(String[] args) {
 
+
         List<MoveDirection> directions = OptionsParser.convert(args);
-        WorldMap map = new RectangularMap(6, 6);
-        List<Vector2d> positions = List.of(new Vector2d(0,0), new Vector2d(1,2), new Vector2d(3,3));
-        Simulation simulation = new Simulation(directions, positions, map);
-        simulation.run();
+        WorldMap map = new GrassField(10);
+        List<Vector2d> positions = List.of( new Vector2d(2,2), new Vector2d(3,4) );
+        Simulation  engine = new Simulation(directions, positions, map);
+        engine.run();
+        System.out.println(map.getElements());
 
     }
 

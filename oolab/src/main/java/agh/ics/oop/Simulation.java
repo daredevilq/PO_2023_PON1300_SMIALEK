@@ -37,11 +37,10 @@ public class Simulation {
         int numberOfAnimals = this.animalsList.size();
         int numberOfMoves = this.initialMoves.size();
         for (MoveDirection initialMove : this.initialMoves) {
-            System.out.println(map.toString());
             Animal actualAnimal = animalsList.get(actualAnimalNumber);
             map.move(actualAnimal, initialMove);
             actualAnimalNumber = (actualAnimalNumber + 1) % numberOfAnimals;
-
+            System.out.println(map.toString());
         }
         System.out.println(map.toString());
 
