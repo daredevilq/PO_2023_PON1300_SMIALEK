@@ -16,7 +16,7 @@ class GrassFieldTest {
     WorldMap map = new GrassField(10);
 
     @Test
-    public void testCanMoveTo() {
+    public void testCanMoveTo() throws PositionAlreadyOccupiedException {
         Vector2d[] positions = { new Vector2d(0,0), new Vector2d(9,9), new Vector2d(0,1) };
         HashSet<String> positionsSet = new HashSet<>();
 
@@ -37,7 +37,7 @@ class GrassFieldTest {
     }
 
     @Test
-    public void testPlace() {
+    public void testPlace() throws PositionAlreadyOccupiedException {
         // Test if 10 grass fields were put
         // (since max distance is sqrt(10 * 10) = 10, we will check all fields which have x and y coordinate
         // between 0 and 10 (inclusive) and count grass fields)
@@ -81,7 +81,7 @@ class GrassFieldTest {
     }
 
     @Test
-    public void Grass_field_test_with_no_moves(){
+    public void Grass_field_test_with_no_moves() throws PositionAlreadyOccupiedException {
         String[] args1 = {};
         List<MoveDirection> directions = new OptionsParser().convert(args1);
         WorldMap map = new GrassField(10);
@@ -96,7 +96,7 @@ class GrassFieldTest {
     }
 
     @Test
-    public void Grass_field_test_with_another_animal_collision(){
+    public void Grass_field_test_with_another_animal_collision() throws PositionAlreadyOccupiedException {
         String[] args1 = {"f", "b", "r", "l", "f", "f"};
         List<MoveDirection> directions = new OptionsParser().convert(args1);
         WorldMap map = new GrassField(10);

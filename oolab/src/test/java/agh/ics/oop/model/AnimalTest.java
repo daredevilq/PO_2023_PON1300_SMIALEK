@@ -20,7 +20,7 @@ public class AnimalTest {
     }
 
     @Test
-    public void orientationTest2(){
+    public void orientationTest2() throws PositionAlreadyOccupiedException {
         //given
         Animal testAnimal = new Animal();
         WorldMap map = new RectangularMap(4, 4);
@@ -35,7 +35,7 @@ public class AnimalTest {
 
 
     @Test
-    public void orientationTest3(){
+    public void orientationTest3() throws PositionAlreadyOccupiedException {
         //given
         Animal testAnimal = new Animal();
         WorldMap map = new RectangularMap(4, 4);
@@ -48,7 +48,7 @@ public class AnimalTest {
     }
 
     @Test
-    public void orientationTest4(){
+    public void orientationTest4() throws PositionAlreadyOccupiedException {
         //given
         Animal testAnimal = new Animal();
         WorldMap map = new RectangularMap(4, 4);
@@ -65,7 +65,7 @@ public class AnimalTest {
     //czy zwierzę przemieszcza się na właściwe pozycje
 
     @Test
-    public void moveTest1(){
+    public void moveTest1() throws PositionAlreadyOccupiedException {
         //given
         Animal testAnimal = new Animal();
         WorldMap map = new RectangularMap(4, 4);
@@ -83,7 +83,7 @@ public class AnimalTest {
     }
 
     @Test
-    public void moveTest2(){
+    public void moveTest2() throws PositionAlreadyOccupiedException {
         //given
         Animal testAnimal = new Animal();
         WorldMap map = new RectangularMap(4, 4);
@@ -103,7 +103,7 @@ public class AnimalTest {
     //czy zwierzę nie wychodzi poza mapę
 
     @Test
-    public void moveTest3(){
+    public void moveTest3() throws PositionAlreadyOccupiedException {
         //given
         Animal testAnimal = new Animal();
         WorldMap map = new RectangularMap(4, 4);
@@ -124,7 +124,7 @@ public class AnimalTest {
     }
 
     @Test
-    public void moveTest4(){
+    public void moveTest4() throws PositionAlreadyOccupiedException {
         //given
         Animal testAnimal = new Animal();
         WorldMap map = new RectangularMap(4, 4);
@@ -147,7 +147,7 @@ public class AnimalTest {
     }
 
     @Test
-    public void moveTest5(){
+    public void moveTest5() throws PositionAlreadyOccupiedException {
         //given
         Animal testAnimal = new Animal();
         WorldMap map = new RectangularMap(4, 4);
@@ -169,7 +169,7 @@ public class AnimalTest {
     }
 
     @Test
-    public void moveTest6(){
+    public void moveTest6() throws PositionAlreadyOccupiedException {
         //given
         Animal testAnimal = new Animal();
         WorldMap map = new RectangularMap(4, 4);

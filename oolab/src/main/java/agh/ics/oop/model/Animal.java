@@ -2,36 +2,25 @@ package agh.ics.oop.model;
 
 public class Animal implements WorldElement{
 
-    private MapDirection orientation;
-    private Vector2d position;
+    private MapDirection orientation =  MapDirection.NORTH;
+    private Vector2d position = new Vector2d(2,2);
 
 
     public Animal(){
-        this.position = new Vector2d(2,2);
-        this.orientation = MapDirection.NORTH;
 
     }
 
     public Animal(Vector2d initialPosition){
         this.position = initialPosition;
-        this.orientation = MapDirection.NORTH;
     }
 
     @Override
     public String toString() {
        switch (orientation){
-           case NORTH -> {
-               return "N";
-           }
-           case SOUTH -> {
-               return "S";
-           }
-           case EAST -> {
-               return "E";
-           }
-           case WEST -> {
-               return "W";
-           }
+           case NORTH: return "N";
+           case SOUTH: return "S";
+           case EAST: return "E";
+           case WEST: return "W";
        }
         return null;
     }
@@ -47,7 +36,7 @@ public class Animal implements WorldElement{
         return new Vector2d(x,y).add(moveVector);
     }
 
-    public void moveAnimal(MoveDirection direction, AbstractWorldMap map) {
+    public void moveAnimal(MoveDirection direction, MoveValidator map) {
         switch(direction){
             case FORWARD -> {
                 Vector2d newPosition = calculateNewPosition(this.position.getX(), this.position.getY(), this.orientation.toUnitVector());
@@ -66,7 +55,6 @@ public class Animal implements WorldElement{
 
         }
     }
-
     public Vector2d getPosition() {
         return position;
     }
