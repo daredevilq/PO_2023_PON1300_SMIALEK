@@ -20,26 +20,30 @@ public class Simulation {
         this.animalsList = new ArrayList<>();
         this.map = map;
 
-        for (Vector2d initialPosition : initialPositions) {
-            Animal animal = new Animal(initialPosition);
-            this.animalsList.add(animal);
-            try {
-                this.map.place(animal);
-            } catch (PositionAlreadyOccupiedException e) {
-                System.out.println(e.getMessage());
-                this.animalsList.remove(animal);
+            for (Vector2d initialPosition : initialPositions) {
+                Animal animal = new Animal(initialPosition);
+                this.animalsList.add(animal);
+                synchronized (this.map) {
+                    try {
+                        this.map.place(animal);
+                    } catch (PositionAlreadyOccupiedException e) {
+                        System.out.println(e.getMessage());
+                        this.animalsList.remove(animal);
+                    }
+                }
             }
-        }
+
     }
 
     public void run(){
         int actualAnimalNumber = 0;
         for (MoveDirection initialMove : this.initialMoves) {
             Animal actualAnimal = animalsList.get(actualAnimalNumber);
-            map.move(actualAnimal, initialMove);
+            synchronized (this.map) {
+                map.move(actualAnimal, initialMove);
+            }
             actualAnimalNumber = (actualAnimalNumber + 1) % this.animalsList.size();
         }
-
     }
 
     public List<Animal> getAnimalsList() {

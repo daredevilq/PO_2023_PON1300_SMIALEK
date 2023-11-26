@@ -9,6 +9,7 @@ public abstract class AbstractWorldMap implements WorldMap {
     protected int width;
     protected int height;
 
+    private final UUID uuid;
     protected Vector2d lowerLeft = new Vector2d(0,0);
     protected Vector2d upperRight = new Vector2d(width,height);
     protected Map<Vector2d, Animal> animals = new HashMap<>();
@@ -18,8 +19,10 @@ public abstract class AbstractWorldMap implements WorldMap {
     private final List<MapChangeListener> subscribers = new ArrayList<>();
 
 
-    public AbstractWorldMap() {
+    public AbstractWorldMap()
+    {
         this.mapVisualizer = new MapVisualizer(this);
+        this.uuid = UUID.randomUUID();
     }
 
     public boolean canMoveTo(Vector2d position) {
@@ -41,11 +44,11 @@ public abstract class AbstractWorldMap implements WorldMap {
             else {
                 throw new PositionAlreadyOccupiedException(animal.getPosition());
             }
+        } else {
+            updateMapBounds(animal.getPosition());
+            animals.put(animal.getPosition(), animal);
+            notifySubscribers("Animal placed at " + animal.getPosition().toString());
         }
-        updateMapBounds(animal.getPosition());
-        animals.put(animal.getPosition(), animal);
-        notifySubscribers("Animal placed at " + animal.getPosition().toString());
-
     }
 
     public boolean isOccupied(Vector2d position){
@@ -99,6 +102,10 @@ public abstract class AbstractWorldMap implements WorldMap {
         for (MapChangeListener subscriber : subscribers) {
             subscriber.mapChanged(this, message);
         }
+    }
+
+    public UUID getId() {
+        return uuid;
     }
 
 
