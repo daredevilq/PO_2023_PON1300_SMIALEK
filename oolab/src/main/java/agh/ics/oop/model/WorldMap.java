@@ -55,4 +55,10 @@ public interface WorldMap extends MoveValidator {
     //returns the id of the map
     UUID getId();
 
+    void addSubscriber(MapChangeListener subscriber);
+
+    void removeSubscriber(MapChangeListener subscriber);
+
+    void notifySubscribers(String message);
+
 }

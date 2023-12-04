@@ -29,7 +29,7 @@ public class SimulationEngine implements Runnable {
             threads.add(thread);
             thread.start();
         }
-
+        awaitSimulationsEndAsync();
     }
     public void awaitSimulationsEndAsync() {
         for (Thread thread : threads) {

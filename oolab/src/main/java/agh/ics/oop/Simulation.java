@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static java.lang.Thread.sleep;
+
 public class Simulation {
 
     private final List<MoveDirection> initialMoves;
@@ -14,7 +16,7 @@ public class Simulation {
     private final WorldMap map;
 
 
-    public Simulation(List<MoveDirection> initialMoves, List<Vector2d> initialPositions, WorldMap map) {
+    public Simulation(List<MoveDirection> initialMoves, List<Vector2d> initialPositions, WorldMap map)  {
 
         this.initialMoves = initialMoves;
         this.animalsList = new ArrayList<>();
@@ -26,11 +28,14 @@ public class Simulation {
                 synchronized (this.map) {
                     try {
                         this.map.place(animal);
-                    } catch (PositionAlreadyOccupiedException e) {
+                        Thread.sleep(500);
+                    } catch (PositionAlreadyOccupiedException  | InterruptedException e) {
                         System.out.println(e.getMessage());
                         this.animalsList.remove(animal);
                     }
+
                 }
+
             }
 
     }
@@ -40,7 +45,13 @@ public class Simulation {
         for (MoveDirection initialMove : this.initialMoves) {
             Animal actualAnimal = animalsList.get(actualAnimalNumber);
             synchronized (this.map) {
-                map.move(actualAnimal, initialMove);
+                try {
+                    this.map.move(actualAnimal, initialMove);
+                    Thread.sleep(500);
+                } catch ( InterruptedException e) {
+                    System.out.println(e.getMessage());
+                }
+
             }
             actualAnimalNumber = (actualAnimalNumber + 1) % this.animalsList.size();
         }
