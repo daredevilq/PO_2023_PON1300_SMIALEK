@@ -11,7 +11,7 @@
             fx:controller="agh.ics.oop.presenter.SimulationPresenter">
     <center>
         <Label fx:id="infoLabel" text="All animals will be living here!" textAlignment="CENTER"/>
-<!--        <GridPane fx:id="mapGrid" alignment="CENTER" gridLinesVisible="true"/>-->
+        <GridPane fx:id="mapGrid" alignment="CENTER" gridLinesVisible="true" />
     </center>
     <top>
         <HBox spacing="10" alignment="CENTER">
