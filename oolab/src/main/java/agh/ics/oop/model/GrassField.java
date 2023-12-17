@@ -1,23 +1,18 @@
 package agh.ics.oop.model;
-import agh.ics.oop.model.util.MapVisualizer;
-import java.util.HashMap;
-import java.util.Map;
 
 public class GrassField extends AbstractWorldMap{
 
-    private final int grassCount;
 
 
     public GrassField(int grassCount){
         if (grassCount <= 0) throw new Error("Grass count must be positive");
-        this.grassCount = grassCount;
-        generateGrass();
+        generateGrass(grassCount);
     }
 
 
 
 
-    private void generateGrass(){
+    private void generateGrass(int grassCount){
         int max = Math.min( (int) Math.sqrt(grassCount * 10), Integer.MAX_VALUE);
 
         for (int i = 0; i < grassCount ; i++) {

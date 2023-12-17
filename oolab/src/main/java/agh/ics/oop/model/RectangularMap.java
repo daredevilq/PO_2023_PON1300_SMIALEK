@@ -9,7 +9,6 @@ public class RectangularMap extends AbstractWorldMap{
     public RectangularMap(int width, int height) {
         this.width = width;
         this.height = height;
-
     }
 
     @Override
