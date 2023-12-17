@@ -32,24 +32,29 @@ public class OptionsParserTest {
     }
 
     @Test
-    public void convertTest2(){
+    public void convertTest2() throws IllegalArgumentException{
         //given
         String [] inputValues = {"s","f","b", "zdas","r","dasd"};
 
         //when
-        List<MoveDirection> directions =  OptionsParser.convert(inputValues);
+        try {
+            List<MoveDirection> directions =  OptionsParser.convert(inputValues);
+            boolean outcome = true;
 
-        boolean outcome = true;
+            for (MoveDirection i:directions){
+                boolean temp;
+                temp = i.equals(MoveDirection.FORWARD) || i.equals(MoveDirection.BACKWARD) || i.equals(MoveDirection.LEFT) || i.equals(MoveDirection.RIGHT);
+                outcome = outcome && temp;
+            }
 
-        for (MoveDirection i:directions){
-            boolean temp;
-            temp = i.equals(MoveDirection.FORWARD) || i.equals(MoveDirection.BACKWARD) || i.equals(MoveDirection.LEFT) || i.equals(MoveDirection.RIGHT);
-
-            outcome = outcome && temp;
+            //then
+            assertTrue(outcome);
+        }
+        catch (IllegalArgumentException e){
+            //then
+            assertEquals("argument: " + "s" + " is not legal move specification", e.getMessage());
         }
 
-        //then
-        assertTrue(outcome);
 
     }
 

@@ -6,16 +6,12 @@ import java.util.Map;
 public class GrassField extends AbstractWorldMap{
 
     private final int grassCount;
-    private static final Vector2d lowerLeftBound = new Vector2d(0,0);
-    private static final Vector2d upperRightBound = new Vector2d(Integer.MAX_VALUE,Integer.MAX_VALUE);
-
 
 
     public GrassField(int grassCount){
         if (grassCount <= 0) throw new Error("Grass count must be positive");
         this.grassCount = grassCount;
         generateGrass();
-        //this.mapVisualizer = new MapVisualizer(this);
     }
 
 
@@ -42,4 +38,8 @@ public class GrassField extends AbstractWorldMap{
         return position;
     }
 
+    @Override
+    public Boundary getCurrentBoundary() {
+        return new Boundary(lowerLeft, upperRight);
+    }
 }

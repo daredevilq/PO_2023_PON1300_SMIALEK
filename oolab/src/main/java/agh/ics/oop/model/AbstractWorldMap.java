@@ -15,6 +15,8 @@ public abstract class AbstractWorldMap implements WorldMap {
     protected Map<Vector2d, Grass> grassFields = new HashMap<>();
     protected  MapVisualizer mapVisualizer;
 
+    private final List<MapChangeListener> subscribers = new ArrayList<>();
+
 
     public AbstractWorldMap() {
         this.mapVisualizer = new MapVisualizer(this);
@@ -25,22 +27,25 @@ public abstract class AbstractWorldMap implements WorldMap {
     }
 
     public String toString() {
-        return mapVisualizer.draw(lowerLeft, upperRight);
+        return mapVisualizer.draw(getCurrentBoundary().leftBottom(), getCurrentBoundary().rightTop());
     }
 
-    public  boolean place(Animal animal){
+    public void place(Animal animal) throws PositionAlreadyOccupiedException {
         if (isOccupied(animal.getPosition())) {
             if (objectAt(animal.getPosition()) instanceof Grass) {
                 grassFields.remove(animal.getPosition());
                 animals.put(animal.getPosition(), animal);
                 updateMapBounds(animal.getPosition());
-                return true;
+                notifySubscribers("Animal placed at " + animal.getPosition().toString() + " (grass destroyed)");
             }
-            return false;
+            else {
+                throw new PositionAlreadyOccupiedException(animal.getPosition());
+            }
         }
         updateMapBounds(animal.getPosition());
         animals.put(animal.getPosition(), animal);
-        return true;
+        notifySubscribers("Animal placed at " + animal.getPosition().toString());
+
     }
 
     public boolean isOccupied(Vector2d position){
@@ -52,6 +57,7 @@ public abstract class AbstractWorldMap implements WorldMap {
         upperRight = new Vector2d(Math.max(position.getX(), upperRight.getX()), Math.max(position.getY(), upperRight.getY()));
     }
 
+    public abstract Boundary getCurrentBoundary();
 
     public  WorldElement objectAt(Vector2d position){
         if(this.animals.get(position) != null){
@@ -70,6 +76,7 @@ public abstract class AbstractWorldMap implements WorldMap {
             animals.remove(oldPosition);
             animals.put(newPosition, animal);
             updateMapBounds(newPosition);
+            notifySubscribers("Animal moved from " + oldPosition.toString() + " to " + newPosition.toString());
         }
     }
 
@@ -79,6 +86,21 @@ public abstract class AbstractWorldMap implements WorldMap {
         elements.putAll(Collections.unmodifiableMap(grassFields));
         return elements;
     }
+
+    public void addSubscriber(MapChangeListener subscriber){
+        subscribers.add(subscriber);
+    }
+
+    public void removeSubscriber(MapChangeListener subscriber){
+        subscribers.remove(subscriber);
+    }
+
+    public void notifySubscribers(String message){
+        for (MapChangeListener subscriber : subscribers) {
+            subscriber.mapChanged(this, message);
+        }
+    }
+
 
 }
 

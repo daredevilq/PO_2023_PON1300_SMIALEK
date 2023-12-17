@@ -9,7 +9,6 @@ public class RectangularMap extends AbstractWorldMap{
     public RectangularMap(int width, int height) {
         this.width = width;
         this.height = height;
-        //this.object = new MapVisualizer(this);
 
     }
 
@@ -21,7 +20,10 @@ public class RectangularMap extends AbstractWorldMap{
         return !isOccupied(position);
     }
 
-
+    @Override
+    public Boundary getCurrentBoundary() {
+        return new Boundary(new Vector2d(0,0), new Vector2d(width, height));
+    }
 
     @Override
     public WorldElement objectAt(Vector2d position) {
