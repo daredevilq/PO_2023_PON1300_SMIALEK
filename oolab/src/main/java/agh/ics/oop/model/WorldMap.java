@@ -4,6 +4,7 @@ import agh.ics.oop.model.MoveDirection;
 import agh.ics.oop.model.Vector2d;
 
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * The interface responsible for interacting with the map of the world.
@@ -50,5 +51,8 @@ public interface WorldMap extends MoveValidator {
 
     // Returns the current boundary of the map
     Boundary getCurrentBoundary();
+
+    //returns the id of the map
+    UUID getId();
 
 }
